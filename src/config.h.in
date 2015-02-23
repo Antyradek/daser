@@ -1,0 +1,4 @@
+///Configuration file. Those texts are replaced by CMake during build.
+#define VERSION_MAJOR @VERSION_MAJOR@
+#define VERSION_MINOR @VERSION_MINOR@
+#define VERSION_PATCH @VERSION_PATCH@

@@ -1,0 +1,11 @@
+DASER - Death Amplification by Stimulated Emission of Radiation
+Game in GLFW and C++11
+Takes place in 2D environment, where players shoot lasers at each others.
+Lasers reflect and refract to hit even most hidden targets.
+
+The main purpose of this project is to learn OpenGL
+...and CMake by the way
+
+Most probably, the game will be turn-based like Worms. This is because of Lenz theory of chaos
+laws stating even the smallest difference in position at the beginning can mean lot later.
+This is important, when lasers tend to reflect several times and hit/miss on other players. 
