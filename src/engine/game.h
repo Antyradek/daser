@@ -20,6 +20,9 @@ private:
     ///Were there any errors?
     static bool isGood;
 
+    ///Is the game still running?
+    static bool isRunning;
+
 public:
     ///Initialize engine and show window with parameters
     static void init() throw(GraphicsErrorException);

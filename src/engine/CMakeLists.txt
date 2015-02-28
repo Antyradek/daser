@@ -2,7 +2,7 @@
 add_subdirectory(exceptions)
 
 #Set sources for this library
-set(ENGINE_SRCS game.cpp debug.cpp window.cpp)
+set(ENGINE_SRCS game.cpp debug.cpp window.cpp input_keys.cpp)
 
 #Compile directory as library
 add_library(engine SHARED ${ENGINE_SRCS})

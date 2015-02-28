@@ -12,6 +12,9 @@ class Debug
     public:
         ///Print text in red to stdout
         static void logError(string error);
+
+        ///Print text to stdout
+        static void log(string info);
     protected:
     private:
 };

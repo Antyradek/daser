@@ -9,7 +9,7 @@ SET(CMAKE_CXX_FLAGS "-std=c++11")
 #Build engine
 add_subdirectory(engine)
 
-set(MAIN_SRCS main.cpp)
+set(MAIN_SRCS main.cpp input_listener.cpp)
 
 add_executable(daser ${MAIN_SRCS})
 
