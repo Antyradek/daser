@@ -2,7 +2,9 @@
 
 using namespace de;
 
-Window* Window::thisWindow = nullptr;
+int Window::width = DEFAULT_WIDTH;
+int Window::height = DEFAULT_HEIGHT;
+string Window::title = DEFAULT_TITLE;
 
 Window::Window(int width, int height, string title) throw(GraphicsErrorException)
 {
@@ -14,8 +16,8 @@ Window::Window(int width, int height, string title) throw(GraphicsErrorException
     }
     //Make the window current
     glfwMakeContextCurrent(window);
-    Debug::log("Made new window current");
     glfwSetKeyCallback(window, glfwKeyCallback);
+    Debug::log("Created new " + title + " window");
 }
 
 Window::~Window()
@@ -33,36 +35,33 @@ void Window::forceClose()
     glfwSetWindowShouldClose(window, true);
 }
 
-Window& Window::getWindow(int width, int height, string title) throw(GraphicsErrorException)
+Window& Window::getInstance() throw(GraphicsErrorException)
 {
-    static Window window(width, height, title);
-    thisWindow = &window;
-    return window;
-}
-
-Window& Window::getWindow()
-{
-    return *thisWindow;
+    static Window newWindow(width, height, title) ;
+    return newWindow;
 }
 
 void Window::glfwKeyCallback(GLFWwindow* window, int key, int scancode, int action, int mods)
 {
-    switch(key)
+    if(action == GLFW_PRESS)
     {
-    case GLFW_KEY_ESCAPE:
-        if(action == GLFW_PRESS)
-        {
-            thisWindow->keysListener->escPressed();
-        }
+        Input::getInstance().addPressedKey(key);
     }
 }
 
 void Window::pollEvents()
 {
+    Input::getInstance().clearKeys();
     glfwPollEvents();
 }
 
-void Window::setKeysListener(InputKeys& listener)
+void Window::setDimensions(int newWidth, int newHeight)
 {
-    keysListener = &listener;
+    width = newWidth;
+    height = newHeight;
+}
+
+void Window::setTitle(string newTitle)
+{
+    title = newTitle;
 }

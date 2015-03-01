@@ -6,17 +6,15 @@
 using namespace std;
 namespace de
 {
-    ///Logger to print all errors and warnings
+///Logger to print all errors and warnings to the console. Uses ANSI ESCAPE CODES, so please use less dumb terminal
 class Debug
 {
-    public:
-        ///Print text in red to stdout
-        static void logError(string error);
+public:
+    ///Print text in red to stdout
+    static void logError(string error);
 
-        ///Print text to stdout
-        static void log(string info);
-    protected:
-    private:
+    ///Print text to stdout
+    static void log(string info);
 };
 }
 #endif // DEBUG_H

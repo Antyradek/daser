@@ -11,6 +11,7 @@ using namespace std;
 namespace de
 {
 
+///The main game. This needs to be initialized at the beginning and stopped at the end
 class Game
 {
 private:
@@ -24,6 +25,7 @@ private:
     static bool isRunning;
 
 public:
+
     ///Initialize engine and show window with parameters
     static void init() throw(GraphicsErrorException);
 
@@ -32,8 +34,6 @@ public:
 
     ///Were there any errors?
     static bool checkCorrectness();
-protected:
-
 };
 }
 

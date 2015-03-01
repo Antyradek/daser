@@ -1,32 +1,38 @@
 #ifndef WINDOW_H
 #define WINDOW_H
+#define DEFAULT_WIDTH 512
+#define DEFAULT_HEIGHT 512
+#define DEFAULT_TITLE "DASER"
 #include <GLFW/glfw3.h>
 #include <string>
 #include "exceptions/graphics_error_exception.h"
 #include "debug.h"
-#include "input_keys.h"
+#include "input.h"
 
 using namespace std;
 
 namespace de
 {
-///GLFW Window as a singleton
+///GLFW Window as a Meyers singleton. Gives window with default parameters. You can set them before first call.
 class Window
 {
 private:
-    ///This singletone window
-    static Window* thisWindow;
-
     ///Window structure
     GLFWwindow* window;
 
-    ///Object to send events to
-    InputKeys* keysListener;
+    ///Width of window
+    static int width;
+
+    ///Height of window
+    static int height;
+
+    ///Title of window
+    static string title;
 
     ///Create Window with that size and frame title
     Window(int width, int height, string title) throw(GraphicsErrorException);
 
-    ///Unregusters window from LWGL
+    ///Unregisters window from LWGL
     virtual ~Window();
 
     ///Let the copy constructor be private
@@ -37,12 +43,17 @@ private:
 
     ///Callback for keys usage
     static void glfwKeyCallback(GLFWwindow* window, int key, int scancode, int action, int mods);
+
 public:
-    ///Gets the window instance
-    static Window& getWindow(int width, int height, string title) throw(GraphicsErrorException);
+
+    ///Set the new dimensions for the window
+    static void setDimensions(int newWidth, int newHeight);
+
+    ///Set the new title for the window
+    static void setTitle(string newTitle);
 
     ///Get the current window, it must have been initialized before
-    static Window& getWindow();
+    static Window& getInstance() throw(GraphicsErrorException);
 
     ///Is the window running, or user wants it closed? Returns false, when told to close.
     bool isRunning() const;
@@ -52,9 +63,6 @@ public:
 
     ///Executes given listener for every event there was
     void pollEvents();
-
-    ///Set keys listener
-    void setKeysListener(InputKeys& listener);
 
 };
 }
