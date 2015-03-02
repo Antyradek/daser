@@ -3,6 +3,7 @@
 #define DEFAULT_WIDTH 512
 #define DEFAULT_HEIGHT 512
 #define DEFAULT_TITLE "DASER"
+#define SWAP_INTERVAL 1
 #include <GLFW/glfw3.h>
 #include <string>
 #include "exceptions/graphics_error_exception.h"
@@ -28,6 +29,12 @@ private:
 
     ///Title of window
     static string title;
+
+    ///OpenGL area width
+    int glWidth;
+
+    ///OpenGL area height
+    int glHeight;
 
     ///Create Window with that size and frame title
     Window(int width, int height, string title) throw(GraphicsErrorException);
@@ -63,6 +70,15 @@ public:
 
     ///Executes given listener for every event there was
     void pollEvents();
+
+    ///Swap rendering buffers
+    void swapBuffers();
+
+    ///Get the render area width
+    int getGlWidth();
+
+    ///Get the render area height
+    int getGlHeight();
 
 };
 }

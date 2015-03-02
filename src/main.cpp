@@ -1,37 +1,34 @@
 #include <iostream>
 #include <string>
-#include <GLFW/glfw3.h>
 #include "config.h"
 #include "engine/game.h"
-#include "engine/window.h"
+#include "renderer.h"
 
 using namespace std;
 using namespace de;
+//using namespace glm;
 
 int main()
 {
-
-	cout << "DASER " << VERSION_MAJOR << "." << VERSION_MINOR << "." << VERSION_PATCH << endl;
-	string gameName = "DASER " + to_string(VERSION_MAJOR) + "." + to_string(VERSION_MINOR) + "." + to_string(VERSION_PATCH);
-	Game::init();
-	while(Window::getInstance().isRunning())
+    string gameName = "DASER " + to_string(VERSION_MAJOR) + "." + to_string(VERSION_MINOR) + "." + to_string(VERSION_PATCH);
+    Game::init();
+    Window::setTitle(gameName);
+    while(Window::getInstance().isRunning())
     {
+        Renderer::render();
+
+        //Swap buffers
+        Window::getInstance().swapBuffers();
+
         //drain the event queue
         Window::getInstance().pollEvents();
-        if(Input::getInstance().isPressed(GLFW_KEY_SPACE))
-        {
-            //or .isPressed(32);
-            Debug::log("Mashed SPACE");
-        }
-        if(Input::getInstance().isPressed(GLFW_KEY_ESCAPE))
-        {
-            Window::getInstance().forceClose();
-            //we can also put break here, but this one is less harsh
-        }
+
+        //UPDATE HERE
+
     }
     Debug::log("Exiting game");
 
-	Game::stop();
+    Game::stop();
 
     return 0;
 }

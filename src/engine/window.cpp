@@ -16,7 +16,18 @@ Window::Window(int width, int height, string title) throw(GraphicsErrorException
     }
     //Make the window current
     glfwMakeContextCurrent(window);
+    //Set fuction to receive key events
     glfwSetKeyCallback(window, glfwKeyCallback);
+    //Enable experimental
+    //glewExperimental = true;
+    //if (glewInit() != GLEW_OK)
+    //{
+    //    throw GraphicsErrorException("Failed to start GLEW");
+    //}
+    //Get the size of OpenGL area
+    glfwGetFramebufferSize(window, &glWidth, &glHeight);
+    //Set this to prevent wasted frames and screen tearing
+    glfwSwapInterval(SWAP_INTERVAL);
     Debug::log("Created new " + title + " window");
 }
 
@@ -64,4 +75,19 @@ void Window::setDimensions(int newWidth, int newHeight)
 void Window::setTitle(string newTitle)
 {
     title = newTitle;
+}
+
+void Window::swapBuffers()
+{
+    glfwSwapBuffers(window);
+}
+
+int Window::getGlWidth()
+{
+    return glWidth;
+}
+
+int Window::getGlHeight()
+{
+    return glHeight;
 }
