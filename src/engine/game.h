@@ -1,7 +1,7 @@
 #ifndef GAME_H
 #define GAME_H
 #include <iostream>
-//#include <GL/glew.h>
+#include <GL/glew.h>
 //#include <glm/glm.hpp>
 #include <GLFW/glfw3.h>
 #include "exceptions/graphics_error_exception.h"

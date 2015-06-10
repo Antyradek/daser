@@ -19,6 +19,7 @@ include_directories(${GLFW_INCLUDE_DIRS})
 #We need to use GL in external library. I have no idea why, but using them in main.cpp creates linker misses.
 add_library(renderer SHARED renderer.cpp)
 target_link_libraries(renderer ${GLFW_LIBRARIES})
+target_link_libraries(renderer GLEW)
 
 add_executable(daser ${MAIN_SRCS})
 

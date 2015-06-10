@@ -5,6 +5,7 @@ Lasers reflect and refract to hit even most hidden targets.
 
 The main purpose of this project is to learn OpenGL
 ...and CMake by the way
+...and Git obviously
 
 Most probably, the game will be turn-based like Worms. This is because of Lenz theory of chaos
 laws stating even the smallest difference in position at the beginning can mean lot later.

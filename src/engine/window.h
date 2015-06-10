@@ -4,6 +4,7 @@
 #define DEFAULT_HEIGHT 512
 #define DEFAULT_TITLE "DASER"
 #define SWAP_INTERVAL 1
+#include <GL/glew.h>
 #include <GLFW/glfw3.h>
 #include <string>
 #include "exceptions/graphics_error_exception.h"

@@ -1,15 +1,18 @@
 #ifndef RENDERER_H
 #define RENDERER_H
 #include "engine/window.h"
+#include <fstream>
+#include <vector>
 
 ///Static class to render because fuck you CMake
 class Renderer
 {
 private:
-        Renderer();
-        virtual ~Renderer();
-    public:
-        static void render();
+    GLuint vertexbuffer;
+public:
+    Renderer();
+    virtual ~Renderer();
+    void render();
 };
 
 #endif // RENDERER_H

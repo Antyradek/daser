@@ -13,10 +13,9 @@ int main()
     string gameName = "DASER " + to_string(VERSION_MAJOR) + "." + to_string(VERSION_MINOR) + "." + to_string(VERSION_PATCH);
     Game::init();
     Window::setTitle(gameName);
+    Renderer renderer;
     while(Window::getInstance().isRunning())
     {
-        Renderer::render();
-
         //Swap buffers
         Window::getInstance().swapBuffers();
 
@@ -24,6 +23,7 @@ int main()
         Window::getInstance().pollEvents();
 
         //UPDATE HERE
+        renderer.render();
 
     }
     Debug::log("Exiting game");
