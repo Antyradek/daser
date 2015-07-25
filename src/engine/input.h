@@ -10,7 +10,9 @@ namespace de
 class Input
 {
 private:
+
     Input();
+
     virtual ~Input();
 
     ///Set to store just pressed keys
@@ -31,7 +33,7 @@ public:
     static Input& getInstance();
 
     ///Was the key pressed during this frame?
-    bool isPressed(int key);
+    bool isPressed(int key) const;
 };
 }
 

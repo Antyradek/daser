@@ -19,6 +19,7 @@ namespace de
 class Game
 {
 private:
+
     ///Called when something in GLFW fails. Sets object to failed state and prints error.
     static void glfwErrorCallback(int errorCode, const char* desc);
 

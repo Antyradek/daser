@@ -76,7 +76,7 @@ void Window::setDimensions(int newWidth, int newHeight)
     height = newHeight;
 }
 
-void Window::setTitle(string newTitle)
+void Window::setTitle(const string& newTitle)
 {
     title = newTitle;
 }
@@ -86,12 +86,12 @@ void Window::swapBuffers()
     glfwSwapBuffers(window);
 }
 
-int Window::getGlWidth()
+int Window::getGlWidth() const
 {
     return glWidth;
 }
 
-int Window::getGlHeight()
+int Window::getGlHeight() const
 {
     return glHeight;
 }

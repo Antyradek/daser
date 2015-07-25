@@ -10,6 +10,7 @@ namespace de
 class Debug
 {
 public:
+
     ///Print text in red to stdout
     static void logError(string error);
 

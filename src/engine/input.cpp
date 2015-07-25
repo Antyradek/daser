@@ -28,7 +28,7 @@ void Input::addPressedKey(int key)
     pressedKeys.insert(key);
 }
 
-bool Input::isPressed(int key)
+bool Input::isPressed(int key) const
 {
     return (pressedKeys.find(key) != pressedKeys.end());
 }

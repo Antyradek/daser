@@ -2,7 +2,7 @@
 add_subdirectory(exceptions)
 
 #Set sources for this library
-set(ENGINE_SRCS game.cpp debug.cpp window.cpp input.cpp time.cpp)
+set(ENGINE_SRCS game.cpp debug.cpp window.cpp input.cpp time.cpp shader.cpp)
 
 #Make sure we can build engine
 find_package(PkgConfig REQUIRED)

@@ -19,6 +19,7 @@ namespace de
 class Window
 {
 private:
+
     ///Window structure
     GLFWwindow* window;
 
@@ -58,7 +59,7 @@ public:
     static void setDimensions(int newWidth, int newHeight);
 
     ///Set the new title for the window
-    static void setTitle(string newTitle);
+    static void setTitle(const string& newTitle);
 
     ///Get the current window, it must have been initialized before
     static Window& getInstance() throw(GraphicsErrorException);
@@ -76,10 +77,10 @@ public:
     void swapBuffers();
 
     ///Get the render area width
-    int getGlWidth();
+    int getGlWidth() const;
 
     ///Get the render area height
-    int getGlHeight();
+    int getGlHeight() const;
 
 };
 }

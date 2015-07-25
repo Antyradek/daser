@@ -17,7 +17,7 @@ Time& Time::getInstance()
     return time;
 }
 
-float Time::getTime()
+float Time::getTime() const
 {
     return glfwGetTime();
 }

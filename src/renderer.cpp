@@ -1,7 +1,7 @@
 #include "renderer.h"
 
 using namespace de;
-Renderer::Renderer()
+Renderer::Renderer() : mainShader(Shader("src/shaders/rand.vert", "src/shaders/rand.frag"))
 {
 
     //VAOs
@@ -22,11 +22,12 @@ Renderer::Renderer()
     // Give our vertices to OpenGL.
     glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
 
+
 }
 
 Renderer::~Renderer()
 {
-    //dtor
+    //delete(mainShader);
 }
 
 GLuint LoadShaders(const char * vertex_file_path,const char * fragment_file_path)
