@@ -3,25 +3,24 @@
 using namespace de;
 Renderer::Renderer()
 {
-    GLuint vertexArrayID;
+
+    //VAOs
     glGenVertexArrays(1, &vertexArrayID);
-    //glBindVertexArray(vertexArrayID);
-/*
-    static const GLfloat g_vertex_buffer_data[] =
+    glBindVertexArray(vertexArrayID);
+
+    static const GLfloat vertices[] =
     {
         -1.0f, -1.0f, 0.0f,
         1.0f, -1.0f, 0.0f,
         0.0f,1.0f, 0.0f,
     };
 
-    // This will identify our vertex buffer
-
-// Generate 1 buffer, put the resulting identifier in vertexbuffer
+    // Generate 1 buffer
     glGenBuffers(1, &vertexbuffer);
-// The following commands will talk about our 'vertexbuffer' buffer
+    // The following commands will talk about our 'vertexbuffer' buffer
     glBindBuffer(GL_ARRAY_BUFFER, vertexbuffer);
-// Give our vertices to OpenGL.
-    glBufferData(GL_ARRAY_BUFFER, sizeof(g_vertex_buffer_data), g_vertex_buffer_data, GL_STATIC_DRAW);*/
+    // Give our vertices to OpenGL.
+    glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
 
 }
 
@@ -110,28 +109,21 @@ GLuint LoadShaders(const char * vertex_file_path,const char * fragment_file_path
 
 void Renderer::render()
 {
+    glEnableVertexAttribArray(0);
+    glBindBuffer(GL_ARRAY_BUFFER, vertexbuffer);
+    //TODO na nullptr
+    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, (void*)0);
+    //drawing here
+    glDrawArrays(GL_TRIANGLES, 0, 3);
+
+
+    glDisableVertexAttribArray(0);
     /*
     // Create and compile our GLSL program from the shaders
     GLuint programID = LoadShaders( "rand.vert", "rand.frag" );
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     glUseProgram(programID);
 
-
-
-// 1rst attribute buffer : vertices
-    glEnableVertexAttribArray(0);
-    glBindBuffer(GL_ARRAY_BUFFER, vertexbuffer);
-    glVertexAttribPointer(
-        0,          // attribute 0. No particular reason for 0, but must match the layout in the shader.
-        3,// size
-        GL_FLOAT,// type
-        GL_FALSE,// normalized?
-        0,// stride
-        (void*)0// array buffer offset
-    );
-// Draw the triangle !
-    glDrawArrays(GL_TRIANGLES, 0, 3); // Starting from vertex 0; 3 vertices total -> 1 triangle
-    glDisableVertexAttribArray(0);
 
     /*
         float ratio;

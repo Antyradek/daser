@@ -9,6 +9,7 @@ class Renderer
 {
 private:
     GLuint vertexbuffer;
+    GLuint vertexArrayID;
 public:
     Renderer();
     virtual ~Renderer();

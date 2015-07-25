@@ -12,6 +12,7 @@ void Game::init() throw(GraphicsErrorException)
     {
         throw GraphicsErrorException("Can't start GLFW");
     }
+
     isGood = true;
     glfwSetErrorCallback(glfwErrorCallback);
     isRunning = true;
