@@ -4,6 +4,7 @@
 #include <fstream>
 #include <sstream>
 #include "exceptions/io_error_exception.h"
+#include "exceptions/graphics_error_exception.h"
 #include "game.h"
 
 using namespace std;
@@ -20,7 +21,7 @@ private:
 public:
 
     ///Create shader with filename
-    Shader(const string& vertFilename, const string& fragFilename) throw(IOErrorException);
+    Shader(const string& vertFilename, const string& fragFilename) throw(IOErrorException, GraphicsErrorException);
 
     virtual ~Shader();
 

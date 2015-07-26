@@ -2,10 +2,7 @@
 
 using namespace de;
 
-bool Game::isGood;
-bool Game::isRunning = false;
-
-void Game::init() throw(GraphicsErrorException)
+Game::Game() throw(GraphicsErrorException)
 {
     if(isRunning) return;
     if(!glfwInit())
@@ -18,7 +15,7 @@ void Game::init() throw(GraphicsErrorException)
     isRunning = true;
 }
 
-void Game::stop()
+Game::~Game()
 {
     if(!isRunning) return;
     glfwTerminate();
@@ -27,11 +24,17 @@ void Game::stop()
 
 void Game::glfwErrorCallback(int errorCode, const char* desc)
 {
-    isGood = false;
+    getInstance().isGood = false;
     Debug::logError("GLFW Error: " + to_string(errorCode) + desc);
 }
 
 bool Game::checkCorrectness()
 {
     return isGood;
+}
+
+Game& Game::getInstance() throw(GraphicsErrorException)
+{
+    static Game newGame;
+    return newGame;
 }

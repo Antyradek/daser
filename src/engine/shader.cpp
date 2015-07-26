@@ -2,7 +2,7 @@
 
 using namespace de;
 /// Initialize and register shader pairs. Vertex and Fragment shaders.
-Shader::Shader(const string& vertFilename, const string& fragFilename)  throw(IOErrorException)
+Shader::Shader(const string& vertFilename, const string& fragFilename)  throw(IOErrorException, GraphicsErrorException)
 {
     ifstream vertStream(vertFilename, ifstream::in);
     ifstream fragStream(fragFilename, ifstream::in);
@@ -33,10 +33,53 @@ Shader::Shader(const string& vertFilename, const string& fragFilename)  throw(IO
     glCompileShader(vertShader);
     glCompileShader(fragShader);
 
+    //check
+    //TODO Make a more detailed messages in future
+    GLint status;
+    glGetShaderiv(vertShader, GL_COMPILE_STATUS, &status);
+    if(status == GL_FALSE)
+    {
+        string msg;
+        GLint infoLogLength;
+        glGetShaderiv(vertShader, GL_INFO_LOG_LENGTH, &infoLogLength);
+        char strInfoLog[infoLogLength + 1];
+        glGetShaderInfoLog(vertShader, infoLogLength, nullptr, strInfoLog);
+        msg += strInfoLog;
+        Debug::logError("Compilation error " + msg);
+        throw GraphicsErrorException("Error in " + vertFilename + " compilaton: " + msg);
+    }
+    glGetShaderiv(fragShader, GL_COMPILE_STATUS, &status);
+    if(status == GL_FALSE)
+    {
+        string msg;
+        GLint infoLogLength;
+        glGetShaderiv(fragShader, GL_INFO_LOG_LENGTH, &infoLogLength);
+        char strInfoLog[infoLogLength + 1];
+        glGetShaderInfoLog(fragShader, infoLogLength, nullptr, strInfoLog);
+        msg += strInfoLog;
+        Debug::logError("Compilation error " + msg);
+        throw GraphicsErrorException("Error in " + fragFilename + " compilaton: " + msg);
+    }
+
     programId = glCreateProgram();
     glAttachShader(programId, vertShader);
     glAttachShader(programId, fragShader);
     glLinkProgram(programId);
+    glDetachShader(programId, vertShader);
+    glDetachShader(programId, fragShader);
+
+    glGetProgramiv(programId, GL_LINK_STATUS, &status);
+    if (status == GL_FALSE) {
+        string msg;
+        GLint infoLogLength;
+        glGetProgramiv(programId, GL_INFO_LOG_LENGTH, &infoLogLength);
+        char strInfoLog[infoLogLength + 1];
+        glGetProgramInfoLog(programId, infoLogLength, nullptr, strInfoLog);
+        msg += strInfoLog;
+        glDeleteProgram(programId);
+        Debug::logError("Shader linking error " + msg);
+        throw GraphicsErrorException("Error linking: " + msg);
+    }
 }
 
 Shader::~Shader()

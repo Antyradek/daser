@@ -8,10 +8,12 @@ string Window::title = DEFAULT_TITLE;
 
 Window::Window(int width, int height, string title) throw(GraphicsErrorException)
 {
-    glfwWindowHint(GLFW_SAMPLES, 4);
+    glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
+    //glfwWindowHint(GLFW_SAMPLES, 4);
     glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
     glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
     glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
+    glfwWindowHint(GLFW_RESIZABLE, GL_FALSE);
     window = glfwCreateWindow(width, height, title.c_str(), nullptr, nullptr);
     if(window == nullptr)
     {
@@ -21,7 +23,7 @@ Window::Window(int width, int height, string title) throw(GraphicsErrorException
     //Make the window current
     glfwMakeContextCurrent(window);
     //Enable experimental
-    glewExperimental = true;
+    glewExperimental = GL_TRUE;
     if (glewInit() != GLEW_OK)
     {
         throw GraphicsErrorException("Failed to start GLEW");
@@ -29,9 +31,9 @@ Window::Window(int width, int height, string title) throw(GraphicsErrorException
     //Set fuction to receive key events
     glfwSetKeyCallback(window, glfwKeyCallback);
     //Get the size of OpenGL area
-    glfwGetFramebufferSize(window, &glWidth, &glHeight);
+    //glfwGetFramebufferSize(window, &glWidth, &glHeight);
     //Set this to prevent wasted frames and screen tearing
-    glfwSwapInterval(SWAP_INTERVAL);
+    //glfwSwapInterval(SWAP_INTERVAL);
     Debug::log("Created new " + title + " window");
 }
 

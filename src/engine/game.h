@@ -24,21 +24,30 @@ private:
     static void glfwErrorCallback(int errorCode, const char* desc);
 
     ///Were there any errors?
-    static bool isGood;
+    bool isGood;
 
     ///Is the game still running?
-    static bool isRunning;
+    bool isRunning;
+
+    ///Initialize engine and show window with parameters
+    Game() throw(GraphicsErrorException);
+
+    ///Turn off program
+    virtual ~Game();
+
+    ///Let the copy constructor be private
+    Game(const Game&) = delete;
+
+    ///Let this be private too
+    Game& operator=(const Game&) = delete;
 
 public:
 
-    ///Initialize engine and show window with parameters
-    static void init() throw(GraphicsErrorException);
-
-    ///Turn off program
-    static void stop();
-
     ///Were there any errors?
-    static bool checkCorrectness();
+    bool checkCorrectness();
+
+    ///Get the current window, it must have been initialized before
+    static Game& getInstance() throw(GraphicsErrorException);
 };
 }
 
