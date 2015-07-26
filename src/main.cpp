@@ -1,7 +1,13 @@
 #include <iostream>
+#include <sstream>
+#include <fstream>
 #include <string>
+#include <GL/glew.h>
+#include <GLFW/glfw3.h>
 #include "config.h"
 #include "engine/game.h"
+#include "engine/window.h"
+#include "engine/shader.h"
 #include "renderer.h"
 
 using namespace std;
@@ -13,21 +19,19 @@ int main()
     string gameName = "DASER " + to_string(VERSION_MAJOR) + "." + to_string(VERSION_MINOR) + "." + to_string(VERSION_PATCH);
     Game::getInstance();
     Window::setTitle(gameName);
-    //Create actual window
     Window::getInstance();
+
+    //Renderer renderer;
+    //Shader mainShader("src/shaders/rand.vert", "src/shaders/rand.frag");
     Renderer renderer;
+
     while(Window::getInstance().isRunning())
     {
-        //drain the event queue
         Window::getInstance().pollEvents();
 
-        //UPDATE HERE
         renderer.render();
 
-          //Swap buffers
         Window::getInstance().swapBuffers();
-
     }
-    Debug::log("Exiting game");
     return 0;
 }

@@ -14,6 +14,8 @@ add_library(engine SHARED ${ENGINE_SRCS})
 include_directories(${GLFW_INCLUDE_DIRS})
 target_link_libraries(engine ${GLFW_LIBRARIES})
 target_link_libraries(engine engine_exceptions)
+target_link_libraries(engine GLEW)
+target_link_libraries(engine GL)
 
 
 

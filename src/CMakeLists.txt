@@ -20,10 +20,14 @@ include_directories(${GLFW_INCLUDE_DIRS})
 add_library(renderer SHARED renderer.cpp)
 target_link_libraries(renderer ${GLFW_LIBRARIES})
 target_link_libraries(renderer GLEW)
+target_link_libraries(renderer GL)
 
 add_executable(daser ${MAIN_SRCS})
 
 #Add engine and rendering functions
 target_link_libraries(daser engine)
 target_link_libraries(daser renderer)
+target_link_libraries(daser GLEW)
+target_link_libraries(daser ${GLFW_LIBRARIES})
+target_link_libraries(daser GL)
 

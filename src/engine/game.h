@@ -2,7 +2,6 @@
 #define GAME_H
 #include <iostream>
 #include <GL/glew.h>
-//#include <glm/glm.hpp>
 #include <GLFW/glfw3.h>
 #include "exceptions/graphics_error_exception.h"
 #include "exceptions/glfw_error_exception.h"

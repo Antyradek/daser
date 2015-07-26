@@ -35,6 +35,8 @@ Window::Window(int width, int height, string title) throw(GraphicsErrorException
     //Set this to prevent wasted frames and screen tearing
     //glfwSwapInterval(SWAP_INTERVAL);
     Debug::log("Created new " + title + " window");
+    if(!GLEW_VERSION_3_3)
+        Debug::logError("GLEW 3.3 is not supported!!!");
 }
 
 Window::~Window()

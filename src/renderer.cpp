@@ -1,9 +1,9 @@
 #include "renderer.h"
 
 using namespace de;
-Renderer::Renderer() : mainShader(Shader("src/shaders/rand.vert", "src/shaders/rand.frag"))
+Renderer::Renderer() : mainShader(new Shader("src/shaders/rand.vert", "src/shaders/rand.frag"))
 {
-
+    //We can't use rvalue reference (Shader&& mainShader), because that makes a reference to temporary variable which is destroyed after constructor
     //VAOs
     vertexArrayID = 0;
     vertexbuffer = 0;
@@ -22,13 +22,12 @@ Renderer::Renderer() : mainShader(Shader("src/shaders/rand.vert", "src/shaders/r
     // Give our vertices to OpenGL.
     glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
 
-    glEnableVertexAttribArray(glGetAttribLocation(mainShader.getData(), "vert"));
+    glEnableVertexAttribArray(glGetAttribLocation(mainShader->getData(), "vert"));
 
-    glVertexAttribPointer(glGetAttribLocation(mainShader.getData(), "vert"), 3, GL_FLOAT, GL_FALSE, 0, nullptr);
+    glVertexAttribPointer(glGetAttribLocation(mainShader->getData(), "vert"), 3, GL_FLOAT, GL_FALSE, 0, nullptr);
 
     glBindVertexArray(0);
     glBindBuffer(GL_ARRAY_BUFFER, 0);
-
 }
 
 Renderer::~Renderer()
@@ -41,7 +40,7 @@ void Renderer::render()
     glClearColor(0.5,0.5,0,1);
     glClear(GL_COLOR_BUFFER_BIT);
 
-    glUseProgram(mainShader.getData());
+    glUseProgram(mainShader->getData());
     glBindVertexArray(vertexArrayID);
     glDrawArrays(GL_TRIANGLES, 0, 3);
 

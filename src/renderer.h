@@ -4,6 +4,7 @@
 #include "engine/shader.h"
 #include <fstream>
 #include <vector>
+#include <memory>
 
 using namespace de;
 ///Static class to render because fuck you CMake
@@ -12,7 +13,7 @@ class Renderer
 private:
     GLuint vertexbuffer;
     GLuint vertexArrayID;
-    Shader&& mainShader;
+    unique_ptr<Shader> mainShader;
 public:
     Renderer();
     virtual ~Renderer();
